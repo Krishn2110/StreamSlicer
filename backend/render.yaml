@@ -3,9 +3,8 @@ services:
     name: streamslicer
     env: node
     buildCommand: |
-      apt-get update && apt-get install -y ffmpeg
+      apt-get update && apt-get install -y ffmpeg curl
+      curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o /usr/local/bin/yt-dlp
+      chmod a+rx /usr/local/bin/yt-dlp
       npm install
     startCommand: node index.js
-    envVars:
-      - key: NODE_ENV
-        value: production
