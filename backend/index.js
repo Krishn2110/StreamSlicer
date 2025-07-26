@@ -46,7 +46,9 @@ app.post('/api/download', (req, res) => {
     const finalFilename = `${safeTitle}.mp3`;
     const outputTemplate = path.join(DOWNLOAD_DIR, `${safeTitle}.%(ext)s`);
 
-    const downloadCommand = `yt-dlp -x --audio-format mp3 --ffmpeg-location "C:/Users/ASUS/Downloads/ffmpeg-7.1.1-full_build/ffmpeg-7.1.1-full_build/bin/ffmpeg.exe" -o "${outputTemplate}" "${videoUrl}"`;
+    // const downloadCommand = `yt-dlp -x --audio-format mp3 --ffmpeg-location "C:/Users/ASUS/Downloads/ffmpeg-7.1.1-full_build/ffmpeg-7.1.1-full_build/bin/ffmpeg.exe" -o "${outputTemplate}" "${videoUrl}"`;
+    const downloadCommand = `yt-dlp -x --audio-format mp3 -o "${outputTemplate}" "${videoUrl}"`;
+
 
     exec(downloadCommand, (downloadErr) => {
       if (downloadErr) return res.status(500).json({ error: 'Download failed' });
