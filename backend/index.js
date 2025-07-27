@@ -36,8 +36,12 @@ app.post('/api/download', (req, res) => {
   console.log('yt-dlp version check:', stdout || stderr);
 });
 
-  exec(metadataCommand, (err, stdout) => {
-    if (err) return res.status(500).json({ error: 'Metadata fetch failed' });
+  exec(metadataCommand, (err, stdout, stderr) => {
+    if (err) {
+    console.error('Metadata fetch error:', err);
+    console.error('stderr:', stderr);
+    return res.status(500).json({ error: 'Metadata fetch failed' });
+  }
 
     let metadata;
     try {
