@@ -32,6 +32,10 @@ app.post('/api/download', (req, res) => {
 
   const metadataCommand = `yt-dlp --print-json "${videoUrl}"`;
 
+  exec('yt-dlp --version', (err, stdout, stderr) => {
+  console.log('yt-dlp version check:', stdout || stderr);
+});
+
   exec(metadataCommand, (err, stdout) => {
     if (err) return res.status(500).json({ error: 'Metadata fetch failed' });
 
